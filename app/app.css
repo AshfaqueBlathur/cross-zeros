@@ -44,6 +44,7 @@ body{
     border-radius: 6px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    transition: .3s;
 }
 .blusplay{
     background-color: rgba(0, 0, 255, 0.25);
@@ -79,7 +80,7 @@ body{
 }
 @keyframes justcrossed {
     0%,100%{
-        background-color: rgba(55, 55, 55, 0.5);
+        background-color: rgb(255, 255, 255);
     }
 }
 @keyframes scoreupdate {
