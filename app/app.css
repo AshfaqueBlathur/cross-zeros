@@ -35,6 +35,7 @@ body{
 }
 .score{
     font-size: 3em;
+    animation: scoreupdate .5s;
 }
 .table{
     width: var(--table-side);
@@ -44,11 +45,11 @@ body{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 }
-.blu{
-    background-color: rgba(0, 0, 255, 0.5);
+.blusplay{
+    background-color: rgba(0, 0, 255, 0.25);
 }
-.red{
-    background-color: rgba(255, 0, 0, 0.5);
+.redsplay{
+    background-color: rgba(255, 0, 0, 0.25);
 }
 .zeros{
     width: calc(calc(var(--table-side) / 8) - 4px);
@@ -56,4 +57,35 @@ body{
     border-radius: 50%;
     border: black 4px solid;
     margin: 2px;
+    cursor: pointer;
+}
+.crossedbyred,
+.crossedbyblu
+{
+    animation: justcrossed .3s ease;
+    pointer-events: none;
+}
+.crossedbyblu{
+    background-color: blue;
+}
+.crossedbyred{
+    background-color: red;
+}
+.blusplay .zeros:hover{
+    background-color: rgba(0, 0, 255, 0.9);
+}
+.redsplay .zeros:hover{
+    background-color: rgba(255, 0, 0, 0.75);
+}
+@keyframes justcrossed {
+    0%,100%{
+        background-color: rgba(0, 255, 100, 0.5);
+    }
+}
+@keyframes scoreupdate {
+    0%,100%{
+        color: rgb(255, 255, 255);
+        font-size: 3.25em;
+        font-weight: bolder;
+    }
 }
