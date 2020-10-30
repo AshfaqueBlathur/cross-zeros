@@ -1,6 +1,9 @@
 window.onload = function(){
+
     console.log("window ready");
+
 }
+
 var playToken = "redsplay"
 
 const table = document.querySelector(".table")
@@ -9,7 +12,9 @@ const zeros = document.querySelectorAll(".zeros")
 
 
 zeros.forEach(zero => {
+
     zero.addEventListener("click", clickEvent);
+
 })
 
 function clickEvent(e){
@@ -21,7 +26,6 @@ function clickEvent(e){
     if (playToken == "redsplay") {
 
         zero.classList.add("crossedbyred");
-        console.log("added class crossedbyred");
 
         table.classList.remove(playToken);
         table.classList.add("blusplay");
@@ -31,7 +35,6 @@ function clickEvent(e){
     } else if (playToken == "blusplay") {
 
         zero.classList.add("crossedbyblu");
-        console.log("added class crossedbyblu");
 
         table.classList.remove(playToken);
         table.classList.add("redsplay");

@@ -79,7 +79,7 @@ body{
 }
 @keyframes justcrossed {
     0%,100%{
-        background-color: rgba(0, 255, 100, 0.5);
+        background-color: rgba(55, 55, 55, 0.5);
     }
 }
 @keyframes scoreupdate {
