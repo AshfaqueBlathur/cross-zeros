@@ -121,6 +121,15 @@ function clickEvent(e){
     } else if (playToken == "blusplay"){
         playToken = "redsplay"
     }
+
+        
+    if ((redsScore + blusScore) = 72 ){
+        if (redsScore > blusScore){
+            document.innerText = "RED WON!"
+        } else if (blusScore > redsScore){
+            document.innerText = "BLUE WON!"
+        }
+    }
 }
 
 }
@@ -130,11 +139,3 @@ function startGame(){
     table.classList.add(playToken);
 }
 startGame()
-
-if ((redsScore + blusScore) = 72 ){
-    if (redsScore > blusScore){
-        document.innerText = "RED WON!"
-    } else if (blusScore > redsScore){
-        document.innerText = "BLUE WON!"
-    }
-}
