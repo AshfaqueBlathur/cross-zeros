@@ -1,5 +1,10 @@
-// global constants
+// global constants...
+
 var playToken = "redsplay"
+var blusScore = 0
+var redsScore = 0
+const bluScoreHud = document.getElementById("blu-score")
+const redScoreHud = document.getElementById("red-score")
 const table = document.querySelector(".table")
 const zeros = document.querySelectorAll(".zeros")
 const c1 = Array.from(document.getElementsByClassName("c1"))
@@ -29,10 +34,22 @@ zeros.forEach(zero => {
 
 // click event
 function clickEvent(e){
+
     const zerosArray = Array.from(zeros)
     const zero = e.target
 
     console.log(zerosArray.indexOf(zero) + 1 + " th zero is clicked");
+
+    
+    // player swapper...               
+    function playSwpper(){
+        if (playToken == "redsplay") {
+            playToken = "blusplay"
+        } else if (playToken == "blusplay"){
+            playToken = "redsplay"
+        }
+    }
+    playSwpper()
 
     // basic things to do
     if (playToken == "redsplay") {
@@ -41,7 +58,6 @@ function clickEvent(e){
         table.classList.remove(playToken);
         table.classList.add("blusplay");
         zero.setAttribute("data-value" , "1");
-        swapPlay();
 
     } else if (playToken == "blusplay") {
 
@@ -49,53 +65,66 @@ function clickEvent(e){
         table.classList.remove(playToken);
         table.classList.add("redsplay");
         zero.setAttribute("data-value" , "1");
-        swapPlay();
 
     }
 
-    // locators
+
+    // coloumn locator...
     columnLocator();
      function columnLocator(){
 
         for (let i = 0; i < coloumns.length; i++){
             if (coloumns[i].includes(zero)){
+                
                 var clickedColoumn = Array.from(coloumns[i])
-                console.log(clickedColoumn)
+                
+                var coloumnScoreKey = clickedColoumn.every(el => el.getAttribute("data-value") == "1")
+                console.log( coloumnScoreKey )
 
-                    console.log(clickedColoumn.every(function(divs){  
-                        divs.getAttribute("data-value") == "1"
-                    }))
-                    
+                if ( coloumnScoreKey == true ){
+                    var coloumnScore = clickedColoumn.length
+                    console.log(coloumnScore)
+                         if ( playToken == "redsplay" ) {
+                             redScoreHud.innerText = redsScore + coloumnScore
+                         }
+                         if ( playToken == "blusplay" ) {
+                             bluScoreHud.innerText = blusScore + coloumnScore
+                         }                     
+                 }
             }
         }
     }
+
+    // row locator...
     rowLocator();
      function rowLocator(){
         for (let i = 0; i < rows.length; i++){
             if (rows[i].includes(zero)){
-                var clickedRow = Array.from(rows[i])
-                console.log(clickedRow)
 
-                    console.log(clickedRow.every(function(divs){
-                        divs.getAttribute("data-value") == "1"
-                    }))
+                var clickedRow = Array.from(rows[i])
                 
+                var rowScoreKey = clickedRow.every(el => el.getAttribute("data-value") == "1")
+                console.log( rowScoreKey )
+
+                if ( rowScoreKey == true ){
+                   var rowScore = clickedRow.length
+                   console.log(rowScore)
+                        if ( playToken == "redsplay" ) {
+                            redScoreHud.innerText = redsScore + rowScore
+                        }
+                        if ( playToken == "blusplay" ) {
+                            bluScoreHud.innerText = blusScore + rowScore
+                        }                     
+                }
             }
         }
     }
 
+   
+
 }
 
-// play swapper
-function swapPlay(){
-    if (playToken == "redsplay") {
-        playToken = "blusplay"
-    } else {
-        playToken = "redsplay"
-    }
-}
-
-// initiator
+// initiator...
 function startGame(){
     table.classList.add(playToken);
 }

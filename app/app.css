@@ -59,18 +59,18 @@ body{
     border: black 4px solid;
     margin: 2px;
     cursor: pointer;
+    background-image: url(resources/img/icons8-egg-48.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .crossedbyred,
 .crossedbyblu
 {
     animation: justcrossed .3s ease;
     pointer-events: none;
-}
-.crossedbyblu{
-    background-color: blue;
-}
-.crossedbyred{
-    background-color: red;
+    background-image: url(resources/img/icons8-sunny-side-up-eggs-50.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .blusplay .zeros:hover{
     background-color: rgba(0, 0, 255, 0.9);
