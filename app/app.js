@@ -129,5 +129,12 @@ function clickEvent(e){
 function startGame(){
     table.classList.add(playToken);
 }
-
 startGame()
+
+if ((redsScore + blusScore) = 72 ){
+    if (redsScore > blusScore){
+        document.innerText = "RED WON!"
+    } else if (blusScore > redsScore){
+        document.innerText = "BLUE WON!"
+    }
+}
