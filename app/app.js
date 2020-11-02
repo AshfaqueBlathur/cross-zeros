@@ -41,15 +41,7 @@ function clickEvent(e){
     console.log(zerosArray.indexOf(zero) + 1 + " th zero is clicked");
 
     
-    // player swapper...               
-    function playSwpper(){
-        if (playToken == "redsplay") {
-            playToken = "blusplay"
-        } else if (playToken == "blusplay"){
-            playToken = "redsplay"
-        }
-    }
-    playSwpper()
+    
 
     // basic things to do
     if (playToken == "redsplay") {
@@ -85,10 +77,10 @@ function clickEvent(e){
                     var coloumnScore = clickedColoumn.length
                     console.log(coloumnScore)
                          if ( playToken == "redsplay" ) {
-                             redScoreHud.innerText = redsScore + coloumnScore
+                             redScoreHud.innerText = (redsScore += coloumnScore)
                          }
                          if ( playToken == "blusplay" ) {
-                             bluScoreHud.innerText = blusScore + coloumnScore
+                             bluScoreHud.innerText = (blusScore += coloumnScore)
                          }                     
                  }
             }
@@ -110,17 +102,26 @@ function clickEvent(e){
                    var rowScore = clickedRow.length
                    console.log(rowScore)
                         if ( playToken == "redsplay" ) {
-                            redScoreHud.innerText = redsScore + rowScore
+                            redScoreHud.innerText = (redsScore += rowScore)
                         }
                         if ( playToken == "blusplay" ) {
-                            bluScoreHud.innerText = blusScore + rowScore
+                            bluScoreHud.innerText = (blusScore += rowScore)
                         }                     
                 }
             }
         }
     }
 
-   
+    
+    playSwpper()
+   // player swapper...               
+   function playSwpper(){
+    if (playToken == "redsplay") {
+        playToken = "blusplay"
+    } else if (playToken == "blusplay"){
+        playToken = "redsplay"
+    }
+}
 
 }
 
