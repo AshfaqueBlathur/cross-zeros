@@ -28,14 +28,14 @@ body{
     bottom: 0;
 }
 .scoreboard{
-    color: black;
-    text-shadow: white 1px 1px;
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) -.09rem .09rem;
     text-align: center;
     text-transform: uppercase;
 }
 .score{
+    color: black;
     font-size: 3em;
-    animation: scoreupdate .5s;
 }
 .table{
     width: var(--table-side);
@@ -80,13 +80,6 @@ body{
 }
 @keyframes justcrossed {
     0%,100%{
-        background-color: rgb(255, 255, 255);
-    }
-}
-@keyframes scoreupdate {
-    0%,100%{
-        color: rgb(255, 255, 255);
-        font-size: 3.25em;
-        font-weight: bolder;
+        background-color: rgb(255, 255, 0);
     }
 }

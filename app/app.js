@@ -26,6 +26,9 @@ const r7 = Array.from(document.getElementsByClassName("r7"))
 const r8 = Array.from(document.getElementsByClassName("r8"))
 const rows = [r1, r2, r3, r4, r5, r6, r7, r8]
 
+const scoreUpdateFrames = [
+    {color : 'rgb(255,255,255)'}
+]
 
 // Event listener
 zeros.forEach(zero => {
@@ -78,9 +81,16 @@ function clickEvent(e){
                     console.log(coloumnScore)
                          if ( playToken == "redsplay" ) {
                              redScoreHud.innerText = (redsScore += coloumnScore)
+                             redScoreHud.animate(scoreUpdateFrames,{
+                                 duration : 250
+                             })
+
                          }
                          if ( playToken == "blusplay" ) {
                              bluScoreHud.innerText = (blusScore += coloumnScore)
+                             bluScoreHud.animate(scoreUpdateFrames,{
+                                duration : 250
+                            })
                          }                     
                  }
             }
@@ -102,16 +112,35 @@ function clickEvent(e){
                    var rowScore = clickedRow.length
                    console.log(rowScore)
                         if ( playToken == "redsplay" ) {
-                            redScoreHud.innerText = (redsScore += rowScore)
+                            redScoreHud.innerText = (redsScore += rowScore);
+                            redScoreHud.animate(scoreUpdateFrames,{
+                                duration : 250
+                            })
                         }
                         if ( playToken == "blusplay" ) {
                             bluScoreHud.innerText = (blusScore += rowScore)
+                            bluScoreHud.animate(scoreUpdateFrames,{
+                                duration : 250
+                            })
                         }                     
                 }
             }
         }
     }
 
+    endGame()
+    function endGame(){
+        if (redsScore + blusScore == 72 ){
+            console.log("total mark is now 72")
+            if (redsScore > blusScore){
+                console.log("RED WON!")
+            } else if (blusScore > redsScore){
+                console.log("BLUE WON!")
+            } else if (blusScore == redsScore){
+                console.log("ITS A DRAW!")
+            }
+        }
+    }
     
     playSwpper()
    // player swapper...               
@@ -121,17 +150,8 @@ function clickEvent(e){
     } else if (playToken == "blusplay"){
         playToken = "redsplay"
     }
-
-        
-    if ((redsScore + blusScore) = 72 ){
-        if (redsScore > blusScore){
-            document.innerText = "RED WON!"
-        } else if (blusScore > redsScore){
-            document.innerText = "BLUE WON!"
-        }
     }
-}
-
+    
 }
 
 // initiator...
