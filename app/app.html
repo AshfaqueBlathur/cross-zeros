@@ -9,6 +9,27 @@
     <script src="app.js" defer></script>
 </head>
 <body>
+    <div class="startedgame" id="starter">
+        <div class="startgamewrap">
+            <img src="resources/img/henny.png" id="welcomflex">
+            <h2><span>hatch me!</span><br>releave your stress with loved ones</h2>
+                <div class="rules" id="rulesheet">
+                    <h3 onclick="readRules()">rules of game!</h3>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                        <li>Lorem ipsum dolor sit amet.</li>
+                    </ul>
+                </div>
+            <button type="submit" onclick="startGame()">start playing!</button>
+        </div>
+    </div>
+
     <div id="wrapper">
         <div class="playerhuds">
             <div class="blushud">
@@ -71,6 +92,14 @@
                 <div class="zeros c8 r2" id="zero35" data-value="0"></div>
                 <div class="zeros c8 r1" id="zero36" data-value="0"></div>
             </div>
+        </div>
+    </div>
+
+    <div class="endgame">
+        <div class="endgamewrap">
+            <img src="" alt="">
+            <h1>Lorem ipsum dolor sit amet.</h1>
+            <button type="submit" onclick="startGame()">restart</button>
         </div>
     </div>
 </body>

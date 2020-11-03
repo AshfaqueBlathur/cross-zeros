@@ -3,10 +3,15 @@
 var playToken = "redsplay"
 var blusScore = 0
 var redsScore = 0
+
 const bluScoreHud = document.getElementById("blu-score")
 const redScoreHud = document.getElementById("red-score")
 const table = document.querySelector(".table")
 const zeros = document.querySelectorAll(".zeros")
+
+const rulesSheet = document.getElementById("rulesheet")
+const starterWindow = document.getElementById("starter")
+
 const c1 = Array.from(document.getElementsByClassName("c1"))
 const c2 = Array.from(document.getElementsByClassName("c2"))
 const c3 = Array.from(document.getElementsByClassName("c3"))
@@ -157,5 +162,18 @@ function clickEvent(e){
 // initiator...
 function startGame(){
     table.classList.add(playToken);
+    starterWindow.classList.remove("startedgame");
+    starterWindow.classList.add("startgame");
+
 }
-startGame()
+
+
+function readRules(){
+    if ( rulesSheet.getAttribute("class") == "rules" ){
+        rulesSheet.classList.add("readrules");
+        rulesSheet.classList.remove("rules");
+    } else if ( rulesSheet.getAttribute("class") == "readrules" ){
+        rulesSheet.classList.add("rules");
+        rulesSheet.classList.remove("readrules");
+    }
+}
