@@ -26,10 +26,17 @@
                         <li>Lorem ipsum dolor sit amet.</li>
                     </ul>
                 </div>
-            <button type="submit" onclick="startGame()">start playing!</button>
+            <button type="submit" onclick="play()">start playing!</button>
         </div>
     </div>
-
+    <div class="tossing" id="tosswindow">
+        <img src="https://decollins1969.files.wordpress.com/2016/03/flipping-coin-animated-gif-5.gif" id="tossresult">
+        <p id="tosstext">head or tail, <span>red ?</span></p>
+        <div class="hideontoss" id="buttonstohide">
+            <button type="submit" onclick="choosenHead()">head</button>
+            <button type="submit" onclick="choosenTail()">tail</button>
+        </div>
+    </div>
     <div id="wrapper">
         <div class="playerhuds">
             <div class="blushud">
@@ -95,11 +102,16 @@
         </div>
     </div>
 
-    <div class="endgame">
+    <div class="endgame" id="winner">
         <div class="endgamewrap">
-            <img src="" alt="">
-            <h1>Lorem ipsum dolor sit amet.</h1>
-            <button type="submit" onclick="startGame()">restart</button>
+            <img src="resources/img/icons8-fried-chicken-50.png" id="outcomeflex">
+            <h1 id="winnermsg">Lorem ipsum dolor sit amet.</h1>
+            <button type="submit" onclick="location.reload()">restart</button>
+            <div class="devcontent">
+                <h2>thank you for your time!</h2>
+                <h3>devoleped by <a href="https://ashfaqueblathur.github.io">ashfaque blathur</a></h3>
+                <p>if you have any suggestions for any further modifications, please let me know through <a href="">whatsapp.</a></p>
+            </div>
         </div>
     </div>
 </body>

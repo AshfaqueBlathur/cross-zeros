@@ -15,7 +15,7 @@ body{
 
 
 
-
+/* starting + ending panal styls */
 .startgame,
 .endgame{
     display: none;
@@ -29,7 +29,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 99;
+    z-index: 100;
 }
 .startedgame{
     background-color: rgba(0, 0, 0, 1);
@@ -43,10 +43,9 @@ body{
     justify-content: center;
     text-align: center;
 }
-
-#welcomflex{
-    width: 150px;
-    height: 150px;
+#welcomflex,
+#outcomeflex{
+    max-width: 200px;
     margin: 50px 0 0 0;
 }
 .startgamewrap h2{
@@ -56,6 +55,15 @@ body{
     letter-spacing: .3rem;
     text-transform: uppercase;
     color: white;
+    text-shadow: rgb(65, 0, 0) -.09rem .09rem;
+}
+.endgamewrap h1{
+    width: 100%;
+    margin: 15px 0;
+    font-size: 42px;
+    letter-spacing: .3rem;
+    text-transform: uppercase;
+    color: rgb(255, 200, 0);
     text-shadow: rgb(0, 0, 0) -.09rem .09rem;
 }
 .startgamewrap h2 span{
@@ -64,11 +72,12 @@ body{
     color: rgb(255, 200, 0);
     text-shadow: rgb(0, 0, 0) -.09rem .09rem;
 }
-.startgamewrap button{
+.startgamewrap button,
+.endgamewrap button{
     width: 40%;
     padding: 10px;
     border-radius: 10px;
-    margin: 25px 0;
+    margin: 15px 0;
     text-transform: uppercase;
     background-color: yellowgreen;
     color: white;
@@ -78,7 +87,8 @@ body{
     font-weight: 900;
     transition: .5s;
 }
-.startgamewrap button:hover{
+.startgamewrap button:hover,
+.endgamewrap button:hover{
     letter-spacing: .6rem;
     background-color: rgba(255, 0, 0, 0.75);
     color: rgb(255, 255, 255);
@@ -117,8 +127,89 @@ body{
     text-shadow: rgb(0, 0, 0) -1px 1px;
     margin: 10px 5%;
 }
+.devcontent{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    margin: 25px 0;
+    width: 80%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
 
+/* tossing panal styls */
+.tossed{
+    display: none
+}
+.tossing{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0);
+    border-radius: 6px;
+    z-index: 99;
+}
+.tossing img{
+    width: 200px;
+    height: 200px;
+    margin-top: 15%;
+    background-color: wheat;
+}
+.hiddenontoss{
+    display: none;
+}
+.hideontoss{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15%;
+}
+.tossing p{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(255, 0, 0) -.06rem .06rem;
+    font-size: 28px;
+    letter-spacing: 0.4rem;
+    line-height: 3rem;
+    min-height: 30px;
+}
+.tossing p span{
+    color: red;
+    text-shadow: rgb(255, 255, 255) -.06rem .06rem;
+}
+.tossing button{
+    margin: 2%;
+    width: 25%;
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    background-color: yellowgreen;
+    color: white;
+    text-shadow: rgb(0, 0, 0) -.09rem .09rem;
+    font-size: 14px;
+    letter-spacing: .4rem;
+    font-weight: 900;
+    transition: .5s;
+}
+.tossing button:hover{
+    letter-spacing: .5rem;
+    background-color: rgba(255, 0, 0, 0.75);
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 255) -.09rem .09rem;
+    cursor: pointer;
+}
 
+/* playing panal styls */
 .wrapper{
     display: block;
     width: 100%;
@@ -170,7 +261,7 @@ body{
     width: calc(calc(var(--table-side) / 8) - 4px);
     height: calc(calc(var(--table-side) / 8) - 4px);
     border-radius: 50%;
-    border: black 4px solid;
+    border: black 1px solid;
     margin: 2px;
     cursor: pointer;
     background-image: url(resources/img/icons8-egg-48.png);

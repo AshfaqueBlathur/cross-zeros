@@ -1,6 +1,6 @@
 // global constants...
 
-var playToken = "redsplay"
+var playToken = ""
 var blusScore = 0
 var redsScore = 0
 
@@ -11,6 +11,16 @@ const zeros = document.querySelectorAll(".zeros")
 
 const rulesSheet = document.getElementById("rulesheet")
 const starterWindow = document.getElementById("starter")
+const winnerPanel = document.getElementById("winner")
+const winnerMsg = document.getElementById("winnermsg")
+const winnerPrice = document.getElementById("outcomeflex")
+
+const tossWindow = document.getElementById("tosswindow")
+const tossResult = document.getElementById("tossresult")
+const tossText = document.getElementById("tosstext")
+const btnsToHide = document.getElementById("buttonstohide")
+const randNum = Math.random()
+
 
 const c1 = Array.from(document.getElementsByClassName("c1"))
 const c2 = Array.from(document.getElementsByClassName("c2"))
@@ -34,6 +44,52 @@ const rows = [r1, r2, r3, r4, r5, r6, r7, r8]
 const scoreUpdateFrames = [
     {color : 'rgb(255,255,255)'}
 ]
+
+
+// toss
+function closeTossWindow(){
+    tossWindow.classList.remove("tossing")
+    tossWindow.classList.add("tossed")
+}
+
+function choosenHead(){
+
+    btnsToHide.classList.remove("hideontoss")
+    btnsToHide.classList.add("hiddenontoss")
+
+    setTimeout(closeTossWindow, 1000)
+
+    if (randNum <= .5){
+        tossText.innerText = "it's a head"
+        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-9c81a54813716fccd8e3608ab2f51dcf")
+        playToken = "redsplay"
+        startGame()
+    } else {
+        tossText.innerText = "it's a tail"
+        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-148ae81e6fe0500e130fb547026a9b26")
+        playToken = "blusplay"
+        startGame()
+    }
+}
+function choosenTail(){
+
+    btnsToHide.classList.remove("hideontoss")
+    btnsToHide.classList.add("hiddenontoss")
+
+    setTimeout(closeTossWindow, 1000)  
+    
+    if (randNum > .5){
+        tossText.innerText = "it's a head"
+        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-9c81a54813716fccd8e3608ab2f51dcf")
+        playToken = "blusplay"
+        startGame()
+    } else {
+        tossText.innerText = "it's a tail"
+        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-148ae81e6fe0500e130fb547026a9b26")
+        playToken = "redsplay"
+        startGame()
+    }
+}
 
 // Event listener
 zeros.forEach(zero => {
@@ -136,13 +192,20 @@ function clickEvent(e){
     endGame()
     function endGame(){
         if (redsScore + blusScore == 72 ){
-            console.log("total mark is now 72")
+            winnerPanel.classList.remove("endgame");
+            winnerPanel.classList.add("endedgame");
             if (redsScore > blusScore){
-                console.log("RED WON!")
+                winnerMsg.innerText = "RED WON!"
+                winnerPanel.style = "background-color: red;"
+                winnerPrice.setAttribute("src", "https://www.mlbstatic.com/team-logos/share/534.jpg")
             } else if (blusScore > redsScore){
-                console.log("BLUE WON!")
+                winnerMsg.innerText = "BLUE WON!"
+                winnerPanel.style = "background-color: blue;"
+                winnerPrice.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQZQM9b_Vx4gbAcfSbzkZqEvmd6pwjH3ZfmyQ&usqp=CAU")
             } else if (blusScore == redsScore){
-                console.log("ITS A DRAW!")
+                winnerMsg.innerText = "ITS A DRAW!"
+                winnerPanel.style = "background-color: black;"
+                winnerPrice.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzC4cB1aHZjeIDcomxGPjD-sf1F9q2M8cCXw&usqp=CAU")
             }
         }
     }
@@ -162,11 +225,13 @@ function clickEvent(e){
 // initiator...
 function startGame(){
     table.classList.add(playToken);
+}
+function play(){
     starterWindow.classList.remove("startedgame");
     starterWindow.classList.add("startgame");
-
+    winnerPanel.classList.remove("endedgame");
+    winnerPanel.classList.add("endgame");
 }
-
 
 function readRules(){
     if ( rulesSheet.getAttribute("class") == "rules" ){
