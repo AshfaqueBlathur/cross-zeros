@@ -191,20 +191,20 @@ function clickEvent(e){
 
     endGame()
     function endGame(){
-        if (redsScore + blusScore == 72 ){
+        if (redsScore + blusScore >= 72 ){
             winnerPanel.classList.remove("endgame");
             winnerPanel.classList.add("endedgame");
             if (redsScore > blusScore){
-                winnerMsg.innerText = "RED WON!"
-                winnerPanel.style = "background-color: red;"
+                winnerMsg.innerText = "RED WiNS!"
+                winnerPanel.style = "background-color: rgb(255, 125, 125);"
                 winnerPrice.setAttribute("src", "https://www.mlbstatic.com/team-logos/share/534.jpg")
             } else if (blusScore > redsScore){
-                winnerMsg.innerText = "BLUE WON!"
-                winnerPanel.style = "background-color: blue;"
+                winnerMsg.innerText = "BLUE WiNS!"
+                winnerPanel.style = "background-color: rgb(125, 125, 255);"
                 winnerPrice.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQZQM9b_Vx4gbAcfSbzkZqEvmd6pwjH3ZfmyQ&usqp=CAU")
             } else if (blusScore == redsScore){
                 winnerMsg.innerText = "ITS A DRAW!"
-                winnerPanel.style = "background-color: black;"
+                winnerPanel.style = "background-color: rgb(73, 73, 73);"
                 winnerPrice.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzC4cB1aHZjeIDcomxGPjD-sf1F9q2M8cCXw&usqp=CAU")
             }
         }

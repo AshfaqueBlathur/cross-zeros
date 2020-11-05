@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Frijole&family=Lato&display=swap');
+/*
+font-family: 'Frijole', cursive;
+font-family: 'Lato', sans-serif;
+*/
+
 :root{
     --table-side: 400px;
 }
@@ -30,6 +36,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
+    overflow: hidden;
 }
 .startedgame{
     background-color: rgba(0, 0, 0, 1);
@@ -46,11 +53,12 @@ body{
 #welcomflex,
 #outcomeflex{
     max-width: 200px;
-    margin: 50px 0 0 0;
+    margin: 10% 0 0 0;
 }
 .startgamewrap h2{
     width: 90%;
     margin: 15px 0;
+    font-family: 'Lato', sans-serif;
     font-size: 15px;
     letter-spacing: .3rem;
     text-transform: uppercase;
@@ -60,14 +68,17 @@ body{
 .endgamewrap h1{
     width: 100%;
     margin: 15px 0;
-    font-size: 42px;
+    font-family: 'Frijole', cursive;
+    font-size: 48px;
     letter-spacing: .3rem;
     text-transform: uppercase;
-    color: rgb(255, 200, 0);
-    text-shadow: rgb(0, 0, 0) -.09rem .09rem;
+    color: rgb(255, 255, 0);
+    text-shadow: rgb(125, 255, 0) 0px 0px 6px,
+                 rgb(0, 255, 125) 0px 0px 6px;
 }
 .startgamewrap h2 span{
-    font-size: 36px;
+    font-family: 'Frijole', cursive;
+    font-size: 3em;
     letter-spacing: 1rem;
     color: rgb(255, 200, 0);
     text-shadow: rgb(0, 0, 0) -.09rem .09rem;
@@ -79,10 +90,11 @@ body{
     border-radius: 10px;
     margin: 15px 0;
     text-transform: uppercase;
-    background-color: yellowgreen;
-    color: white;
-    text-shadow: rgb(0, 0, 0) -.09rem .09rem;
-    font-size: 16px;
+    background-color: rgb(0, 255, 0);
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) -.09rem .09rem;
+    font-family: 'Frijole', cursive;
+    font-size: 12px;
     letter-spacing: .5rem;
     font-weight: 900;
     transition: .5s;
@@ -90,27 +102,37 @@ body{
 .startgamewrap button:hover,
 .endgamewrap button:hover{
     letter-spacing: .6rem;
-    background-color: rgba(255, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.5);
     color: rgb(255, 255, 255);
-    text-shadow: rgb(0, 0, 255) -.09rem .09rem;
+    text-shadow: rgb(255, 0, 0) -.09rem .09rem;
     cursor: pointer;
 }
 .rules,
 .readrules{
     display: block;
     width: 80%;
-    background-color: rgba(61, 61, 61, .6);
+    background-color: rgb(0, 0, 0);
 }
 .rules h3,
 .readrules h3{
     text-transform: uppercase;
-    color: red;
-    text-shadow: rgb(255, 255, 255) -.06rem .06rem;
+    color: rgb(0, 255, 255);
+    text-shadow: rgb(255, 255, 255) -.06rem .06rem 2px;
+    font-family: 'Frijole', cursive;
     font-size: 22px;
     letter-spacing: 0.4rem;
     line-height: 3rem;
     min-height: 30px;
     cursor: pointer;
+}
+.rules h3:hover::after,
+.readrules h3:hover::after{
+    content: "tap on me";
+    position: relative;
+    bottom: -15px;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    color: ivory;
 }
 .rules ul{
     display: none;
@@ -120,22 +142,35 @@ body{
 }
 .readrules ul li{
     width: 90%;
+    font-family: 'Lato', sans-serif;
     font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .125rem;
     text-align: center;
-    text-transform: capitalize;
+    text-transform: initial;
     color: rgb(255, 255, 255);
-    text-shadow: rgb(0, 0, 0) -1px 1px;
-    margin: 10px 5%;
+    margin: 2.5%;
 }
 .devcontent{
     display: block;
     position: absolute;
     bottom: 0;
-    margin: 25px 0;
-    width: 80%;
+    width: 100%;
+    min-height: 25%;
+    font-family: 'Lato', sans-serif;
+    font-size: 85%;
     text-align: center;
     color: white;
+    background: linear-gradient(0deg, rgba(0, 0, 0, .0625), rgba(0, 0, 0, .35), rgba(225, 225, 225, .03125));
+}
+.devcontent h2{
+    font-family: 'Frijole', cursive;
+    margin: 3% 0;
     text-transform: uppercase;
+}
+.devcontent a:any-link{
+    text-decoration: none;
+    color: rgb(171, 255, 75);
 }
 
 /* tossing panal styls */
@@ -147,8 +182,8 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 90%;
-    height: 90%;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -156,10 +191,12 @@ body{
     background-color: rgb(0, 0, 0);
     border-radius: 6px;
     z-index: 99;
+    overflow: hidden;
 }
 .tossing img{
     width: 200px;
     height: 200px;
+    border-radius: 50%;
     margin-top: 15%;
     background-color: wheat;
 }
@@ -178,6 +215,7 @@ body{
     text-transform: uppercase;
     color: rgb(255, 255, 255);
     text-shadow: rgb(255, 0, 0) -.06rem .06rem;
+    font-family: 'Lato', sans-serif;
     font-size: 28px;
     letter-spacing: 0.4rem;
     line-height: 3rem;
@@ -214,24 +252,25 @@ body{
     display: block;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 .blushud,
 .redshud{
     width: 100%;
-    max-height: calc(var(--table-side) / 4);
-    height: calc(calc(100vh - var(--table-side)) / 2);
+    height: calc(var(--table-side) / 4);
+   
 }
 .blushud{
-    background-color: rgba(0, 0, 255, 0.25);
+    background: linear-gradient(-180deg, rgba(0, 0, 255, 0.25) 0%, rgba(255, 255, 255, .25) 90%);
 }
 .redshud{
-    background-color: rgba(255, 0, 0, 0.25);
+    background: linear-gradient(360deg, rgba(255, 0, 0, 0.25) 0%, rgba(255, 255, 255, .25) 90%);
     position: absolute;
     bottom: 0;
 }
 .scoreboard{
-    color: rgb(255, 255, 255);
-    text-shadow: rgb(0, 0, 0) -.09rem .09rem;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(100, 100, 100) -.05rem .05rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -239,6 +278,8 @@ body{
     color: black;
     font-size: 3em;
 }
+
+/* tabe styles */
 .table{
     width: var(--table-side);
     height: var(--table-side);
@@ -287,4 +328,32 @@ body{
     0%,100%{
         background-color: rgb(255, 255, 0);
     }
+}
+
+@media only screen and (orientation: landscape){
+
+    .blushud,
+    .redshud{
+        height: 100vh;
+        width: calc(var(--table-side) / 3);
+    }
+    .blushud{
+        background: linear-gradient(90deg, rgba(0, 0, 255, 0.25) 0%, rgba(255, 255, 255, .25) 90%);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .redshud{
+        background: linear-gradient(-90deg, rgba(255, 0, 0, 0.25) 0%, rgba(255, 255, 255, .25) 90%);
+        top: 0;
+        right: 0;
+    }
+    .scoreboard{
+        margin-top: 45vh;
+        font-size: 1em;
+    }
+    .score{
+        font-size: 7em;
+    }
+   
 }

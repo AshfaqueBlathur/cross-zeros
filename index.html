@@ -3,16 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome!</title>
-    <link rel="shortcut icon" href="app/resources/img/icons8-eggs-50.png" type="image/x-icon">
-    <link rel="stylesheet" href="index.css">
+    <title>Hatch me...</title>
+    <link rel="shortcut icon" href="resources/img/icons8-eggs-50.png" type="image/x-icon">
+    <link rel="stylesheet" href="app.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="container">
-            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe in vitae sunt. Commodi optio ut cumque consectetur voluptatibus corrupti maiores.</p>
-            <a href="app/app.html">play now</a>
+    <div class="startedgame" id="starter">
+        <div class="startgamewrap">
+            <img src="resources/img/henny.png" id="welcomflex">
+            <h2><span>hatch me!</span><br>releave your stress with loved ones</h2>
+                <div class="rules" id="rulesheet">
+                    <h3 onclick="readRules()">how to play?</h3>
+                    <ul>
+                        <li>Hatch me is an offline dual tactics game. Board will be having 36 eggs, which we need to hatch through playing.</li>
+                        <li>Both the players should come in to a desicion, wether they are blue one or the red one.</li>
+                        <li>Game will start with a toss to determain who makes the first move. (If any of you fails, don't care. that's not a big deal.)</li>
+                        <li>When a player makes a move, the next chance will always be for the other player.</li>
+                        <li>Whenever any coloum or row fills with all omlets by any moves, the player who made that move will be rewarded with the respective number of omlets in the coloumn/row.</li>
+                        <li>While all the valuble eggs are made omlet, the game ends!</li>
+                    </ul>
+                </div>
+            <button type="submit" onclick="play()">start playing!</button>
+        </div>
+    </div>
+    <div class="tossing" id="tosswindow">
+        <img src="https://decollins1969.files.wordpress.com/2016/03/flipping-coin-animated-gif-5.gif" id="tossresult">
+        <p id="tosstext">head or tail, <span>red ?</span></p>
+        <div class="hideontoss" id="buttonstohide">
+            <button type="submit" onclick="choosenHead()">head</button>
+            <button type="submit" onclick="choosenTail()">tail</button>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="playerhuds">
+            <div class="blushud">
+                <p class="scoreboard"><span class="score" id="blu-score">0</span><br>is the blu's score now</p>
+            </div>
+            <div class="redshud">
+                <p class="scoreboard"><span class="score" id="red-score">0</span><br>is the red's score now</p>
+            </div>
+        </div>
+        <div class="table">
+            <div class="row">
+                <div class="zeros c1 r8" id="zero1" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c2 r8" id="zero2" data-value="0"></div>
+                <div class="zeros c2 r7" id="zero3" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c3 r8" id="zero4" data-value="0"></div>
+                <div class="zeros c3 r7" id="zero5" data-value="0"></div>
+                <div class="zeros c3 r6" id="zero6" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c4 r8" id="zero7" data-value="0"></div>
+                <div class="zeros c4 r7" id="zero8" data-value="0"></div>
+                <div class="zeros c4 r6" id="zero9" data-value="0"></div>
+                <div class="zeros c4 r5" id="zero10" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c5 r8" id="zero11" data-value="0"></div>
+                <div class="zeros c5 r7" id="zero12" data-value="0"></div>
+                <div class="zeros c5 r6" id="zero13" data-value="0"></div>
+                <div class="zeros c5 r5" id="zero14" data-value="0"></div>
+                <div class="zeros c5 r4" id="zero15" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c6 r8" id="zero16" data-value="0"></div>
+                <div class="zeros c6 r7" id="zero17" data-value="0"></div>
+                <div class="zeros c6 r6" id="zero18" data-value="0"></div>
+                <div class="zeros c6 r5" id="zero19" data-value="0"></div>
+                <div class="zeros c6 r4" id="zero20" data-value="0"></div>
+                <div class="zeros c6 r3" id="zero21" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c7 r8" id="zero22" data-value="0"></div>
+                <div class="zeros c7 r7" id="zero23" data-value="0"></div>
+                <div class="zeros c7 r6" id="zero24" data-value="0"></div>
+                <div class="zeros c7 r5" id="zero25" data-value="0"></div>
+                <div class="zeros c7 r4" id="zero26" data-value="0"></div>
+                <div class="zeros c7 r3" id="zero27" data-value="0"></div>
+                <div class="zeros c7 r2" id="zero28" data-value="0"></div>
+            </div>
+            <div class="row">
+                <div class="zeros c8 r8" id="zero29" data-value="0"></div>
+                <div class="zeros c8 r7" id="zero30" data-value="0"></div>
+                <div class="zeros c8 r6" id="zero31" data-value="0"></div>
+                <div class="zeros c8 r5" id="zero32" data-value="0"></div>
+                <div class="zeros c8 r4" id="zero33" data-value="0"></div>
+                <div class="zeros c8 r3" id="zero34" data-value="0"></div>
+                <div class="zeros c8 r2" id="zero35" data-value="0"></div>
+                <div class="zeros c8 r1" id="zero36" data-value="0"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="endgame" id="winner">
+        <div class="endgamewrap">
+            <img src="resources/img/icons8-fried-chicken-50.png" id="outcomeflex">
+            <h1 id="winnermsg"></h1>
+            <button type="submit" onclick="location.reload()">restart</button>
+            <div class="devcontent">
+                <h2>thank you for your time!</h2>
+                <h3>Devoleped by <a href="https://ashfaqueblathur.github.io">Ashfaque Blathur</a></h3>
+                <p>If you have any suggestions, please let me know through <a href="https://wa.link/d5wiis">Whatsapp.</a></p>
+            </div>
         </div>
     </div>
 </body>
