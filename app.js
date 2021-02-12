@@ -1,244 +1,306 @@
-// global constants...
+// ui shits
+const about = document.querySelector('.about'),
+      score = document.querySelector('.score'),
+      chat = document.querySelector('.chat');
+      
+const trig = (target) => {
+    switch(target){
+        case 'about':
+            // open about
+            about.style.display = 'block';
+            score.style.display = 'none';
+            chat.style.display = 'none';
+            break;
+        case 'score':
+            // open about
+            about.style.display = 'none';
+            score.style.display = 'block';
+            chat.style.display = 'none';
+            break;
+        case 'chat':
+            // open chgat
+            about.style.display = 'none';
+            score.style.display = 'none';
+            chat.style.display = 'block';
+            break;
+    };
+};
+trig('score');
 
-var playToken = ""
-var blusScore = 0
-var redsScore = 0
+const toastBlock = document.querySelector('.toastBlock');
+const toast = (tst) => {
+    let tstP = document.createElement('p');
+    tstP.innerText = tst;
+    toastBlock.appendChild(tstP);
+    setTimeout(() => {
+        tstP.remove();
+    }, 3000);
+};
 
-const bluScoreHud = document.getElementById("blu-score")
-const redScoreHud = document.getElementById("red-score")
-const table = document.querySelector(".table")
-const zeros = document.querySelectorAll(".zeros")
-
-const rulesSheet = document.getElementById("rulesheet")
-const starterWindow = document.getElementById("starter")
-const winnerPanel = document.getElementById("winner")
-const winnerMsg = document.getElementById("winnermsg")
-const winnerPrice = document.getElementById("outcomeflex")
-
-const tossWindow = document.getElementById("tosswindow")
-const tossResult = document.getElementById("tossresult")
-const tossText = document.getElementById("tosstext")
-const btnsToHide = document.getElementById("buttonstohide")
-const randNum = Math.random()
-
-
-const c1 = Array.from(document.getElementsByClassName("c1"))
-const c2 = Array.from(document.getElementsByClassName("c2"))
-const c3 = Array.from(document.getElementsByClassName("c3"))
-const c4 = Array.from(document.getElementsByClassName("c4"))
-const c5 = Array.from(document.getElementsByClassName("c5"))
-const c6 = Array.from(document.getElementsByClassName("c6"))
-const c7 = Array.from(document.getElementsByClassName("c7"))
-const c8 = Array.from(document.getElementsByClassName("c8"))
-const coloumns = [c1, c2, c3, c4, c5, c6, c7, c8]
-const r1 = Array.from(document.getElementsByClassName("r1"))
-const r2 = Array.from(document.getElementsByClassName("r2"))
-const r3 = Array.from(document.getElementsByClassName("r3"))
-const r4 = Array.from(document.getElementsByClassName("r4"))
-const r5 = Array.from(document.getElementsByClassName("r5"))
-const r6 = Array.from(document.getElementsByClassName("r6"))
-const r7 = Array.from(document.getElementsByClassName("r7"))
-const r8 = Array.from(document.getElementsByClassName("r8"))
-const rows = [r1, r2, r3, r4, r5, r6, r7, r8]
-
-const scoreUpdateFrames = [
-    {color : 'rgb(255,255,255)'}
-]
-
-
-// toss
-function closeTossWindow(){
-    tossWindow.classList.remove("tossing")
-    tossWindow.classList.add("tossed")
-}
-
-function choosenHead(){
-
-    btnsToHide.classList.remove("hideontoss")
-    btnsToHide.classList.add("hiddenontoss")
-
-    setTimeout(closeTossWindow, 1000)
-
-    if (randNum <= .5){
-        tossText.innerText = "it's a head"
-        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-9c81a54813716fccd8e3608ab2f51dcf")
-        playToken = "redsplay"
-        startGame()
+const msg = () => {
+    let msgValue = document.getElementById('msg');
+    if (msgValue.value.length){
+        send(['message', msgValue.value]);
+        let li = document.createElement('li');
+        li.setAttribute('class', 'me');
+        li.innerText = msgValue.value;
+        msgUl.appendChild(li);
+        li.scrollIntoView();
+        msgValue.value = '';
     } else {
-        tossText.innerText = "it's a tail"
-        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-148ae81e6fe0500e130fb547026a9b26")
-        playToken = "blusplay"
-        startGame()
-    }
-}
-function choosenTail(){
+        toast('type something to send .. . !');
+    };
+};
 
-    btnsToHide.classList.remove("hideontoss")
-    btnsToHide.classList.add("hiddenontoss")
 
-    setTimeout(closeTossWindow, 1000)  
-    
-    if (randNum > .5){
-        tossText.innerText = "it's a head"
-        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-9c81a54813716fccd8e3608ab2f51dcf")
-        playToken = "blusplay"
-        startGame()
+
+// share peer id
+const share = async () => {
+    if (inviteUrl != undefined){
+        let inviteObj = {
+            title: 'Cross Zeros Invitation',
+            text: 'Come, lets play Cross Zeros',
+            url: inviteUrl,
+        }
+        try {
+            await navigator.share(inviteObj)
+            toast('link shared')
+        } catch (err) {
+            toast(err);
+        };
+    };
+};
+
+// Game ...
+const gameTable = document.querySelector('.game-wrap'),
+      aScoreBoard = document.querySelector('.aScore'),
+      bScoreBoard = document.querySelector('.bScore');
+var aScore = 0,
+    bScore = 0,
+    myTurn,
+    opTurn,
+    crossedZeros = [];
+
+// first turn finder
+const firstTurn = () => {
+    if (randNum < 500){
+        return true;
     } else {
-        tossText.innerText = "it's a tail"
-        tossResult.setAttribute("src", "https://qph.fs.quoracdn.net/main-qimg-148ae81e6fe0500e130fb547026a9b26")
-        playToken = "redsplay"
-        startGame()
-    }
-}
+        return false;
+    };
+};
 
-// Event listener
-zeros.forEach(zero => {
-    zero.addEventListener("click", clickEvent);
-})
+// first turn switch config
+if (firstTurn()){
+    myTurn = true;
+    opTurn = false;
+} else {
+    myTurn = false;
+    opTurn = true;
+};
 
-// click event
-function clickEvent(e){
 
-    const zerosArray = Array.from(zeros)
-    const zero = e.target
+// table color init
+const initiateTable = () => {
+    if (myTurn){
+        gameTable.classList.add('myTurn');
+        gameTable.classList.remove('opTurn');
+    } else if (opTurn){
+        gameTable.classList.add('opTurn');
+        gameTable.classList.remove('myTurn');
+    };
+};
+initiateTable();
 
-    console.log(zerosArray.indexOf(zero) + 1 + " th zero is clicked");
+const crossed = (e, r, c) => {
 
+    // send cross to opp
+    if (!crossedZeros.includes(e)){
+        send(['crossed', e.classList[1]]);
+        crossedZeros.push(e);
+    };
+
+    // marking cross
+    if (myTurn){
+        e.classList.add('crossed_by_me')
+    } else if (opTurn){
+        e.classList.add('crossed_by_op')
+    };
+
+    e.setAttribute('data-cross', 'crossed');
+    let score = 0,
+        row = Array.from(document.querySelectorAll(`.${r}`)),
+        col = Array.from(document.querySelectorAll(`.${c}`)),
+        rowScored = row.every(isCrossed),
+        colScored = col.every(isCrossed);
+
+    if(rowScored || colScored){
+        // fuker scored
+        if (rowScored){
+            score = (row.length);
+        } else if (colScored){
+            score = (col.length);
+        };
+        // score adding
+        if (myTurn){
+            aScore += score;
+            aScoreBoard.innerText = aScore;
+        } else if (opTurn){
+            bScore += score;
+            bScoreBoard.innerText = bScore;
+        };
+    } else {
+        // swap turn
+        if (myTurn){
+            myTurn = false;
+            opTurn = true;
+            gameTable.classList.remove('myTurn');
+            gameTable.classList.add('opTurn');
+        } else if (opTurn){
+            myTurn = true;
+            opTurn = false;
+            gameTable.classList.remove('opTurn');
+            gameTable.classList.add('myTurn');
+        };
+    };
+
+    //console.log(aScore + ' v/s ' + bScore);
+    let zeros = Array.from(document.querySelectorAll('.zeros'));
+    if (zeros.every(zero => zero.getAttribute('data-cross') == 'crossed')){
+        if (aScore > bScore){
+            alert('i won, restart browser for a new game..');
+        } else if (bScore > aScore){
+            alert('opponent won, restart browser for a new game..');
+        } else if (aScore == bScore){
+            alert('its a tie, restart browser for a new game..')
+        };
+    };
+};     
+
+const isCrossed = (zero) => {
+    if (zero.getAttribute('data-cross') == 'crossed'){
+        return true;
+    } else {
+        return false;
+    }; 
+};
+
+
+
+const joinForm = document.querySelector('.joinForm');
+// recieve hash peer
+if (location.hash){
+    let opponentPeer = location.hash.slice(1);
+    joinForm.peerId.value = opponentPeer;
+};
+
+// peer js
+const peerDisplay = document.querySelector('.peerIdDisplay');
+
+var peer = new Peer(),
+    myPeerId,
+    inviteUrl,
+    duplex = false;
+
+peer.on('open', id => {
+    myPeerId = id;
+    inviteUrl = `https://cross-zeros.web.app#${myPeerId}`;
+    toast('my peer is: ' + id);
+    peerDisplay.innerHTML = `${id}`;
+    new QRCode(document.getElementById("qrcode"), inviteUrl);
+});
+
+// error
+peer.on('error', function(err) {
+    toast(err);
+});
+
+// join a game
+var conn,
+    randNum = Math.floor(Math.random()*1000);
+
+const joinGame = () => {
+    let peerId = joinForm.peerId.value;
+    conn = peer.connect(peerId);
     
-    
+    conn.on('open', () => {
+        conn.send(['myPeerId', myPeerId]);
+        conn.send(['firstTurn', firstTurn()]);
+        //console.log(firstTurn());
+        // close connection tab
+        joinForm.style.display = 'none';
+    });
+};
 
-    // basic things to do
-    if (playToken == "redsplay") {
 
-        zero.classList.add("crossedbyred");
-        table.classList.remove(playToken);
-        table.classList.add("blusplay");
-        zero.setAttribute("data-value" , "1");
+// recive a connection
+peer.on('connection', function(c) {
+    c.on('data', data => {
+        recieve(data);
+    });
+});
 
-    } else if (playToken == "blusplay") {
-
-        zero.classList.add("crossedbyblu");
-        table.classList.remove(playToken);
-        table.classList.add("redsplay");
-        zero.setAttribute("data-value" , "1");
-
+// send msg
+const send = (msg) => {
+    if (conn){
+        conn.send(msg);
     }
+};
 
 
-    // coloumn locator...
-    columnLocator();
-     function columnLocator(){
+const msgUl = document.querySelector('.msgs');
+// recieve msg
+const recieve = (data) => {
+    console.log(data);
+    switch (data[0]) {
+        case 'myPeerId':
 
-        for (let i = 0; i < coloumns.length; i++){
-            if (coloumns[i].includes(zero)){
-                
-                var clickedColoumn = Array.from(coloumns[i])
-                
-                var coloumnScoreKey = clickedColoumn.every(el => el.getAttribute("data-value") == "1")
-                console.log( coloumnScoreKey )
+            // swap on recieving conn
+            myTurn = !myTurn;
+            opTurn = !opTurn;
+            // connect to him
+            if (!duplex){
+                let opponentPeerId = data[1];
+                conn = peer.connect(opponentPeerId);
+                conn.on('open', () => {
+                    joinForm.style.display = 'none';
+                });
+                duplex = true;
+                break;
+            };
 
-                if ( coloumnScoreKey == true ){
-                    var coloumnScore = clickedColoumn.length
-                    console.log(coloumnScore)
-                         if ( playToken == "redsplay" ) {
-                             redScoreHud.innerText = (redsScore += coloumnScore)
-                             redScoreHud.animate(scoreUpdateFrames,{
-                                 duration : 250
-                             })
+        case 'firstTurn':
+        
+            let firstTurn = data[1];
+            //console.log(firstTurn);
+            
+            if (!firstTurn){
+                myTurn = true;
+                opTurn = false;
+            } else {
+                myTurn = false;
+                opTurn = true;
+            };
+            initiateTable();
+            break;
 
-                         }
-                         if ( playToken == "blusplay" ) {
-                             bluScoreHud.innerText = (blusScore += coloumnScore)
-                             bluScoreHud.animate(scoreUpdateFrames,{
-                                duration : 250
-                            })
-                         }                     
-                 }
-            }
-        }
-    }
+        case 'crossed':
 
-    // row locator...
-    rowLocator();
-     function rowLocator(){
-        for (let i = 0; i < rows.length; i++){
-            if (rows[i].includes(zero)){
+            let zero = document.querySelector(`.${data[1]}`);
+            crossedZeros.push(zero);
+            zero.click();
+            break;
 
-                var clickedRow = Array.from(rows[i])
-                
-                var rowScoreKey = clickedRow.every(el => el.getAttribute("data-value") == "1")
-                console.log( rowScoreKey )
+        case 'message':
 
-                if ( rowScoreKey == true ){
-                   var rowScore = clickedRow.length
-                   console.log(rowScore)
-                        if ( playToken == "redsplay" ) {
-                            redScoreHud.innerText = (redsScore += rowScore);
-                            redScoreHud.animate(scoreUpdateFrames,{
-                                duration : 250
-                            })
-                        }
-                        if ( playToken == "blusplay" ) {
-                            bluScoreHud.innerText = (blusScore += rowScore)
-                            bluScoreHud.animate(scoreUpdateFrames,{
-                                duration : 250
-                            })
-                        }                     
-                }
-            }
-        }
-    }
+            trig('chat');
+            let msg = data[1];
+            let li = document.createElement('li');
+            li.setAttribute('class', 'op');
+            li.innerText = msg;
+            msgUl.appendChild(li);
+            li.scrollIntoView();
+            break;
 
-    endGame()
-    function endGame(){
-        if (redsScore + blusScore >= 72 ){
-            winnerPanel.classList.remove("endgame");
-            winnerPanel.classList.add("endedgame");
-            if (redsScore > blusScore){
-                winnerMsg.innerText = "RED WiNS!"
-                winnerPanel.style = "background-color: rgb(255, 125, 125);"
-                winnerPrice.setAttribute("src", "https://www.mlbstatic.com/team-logos/share/534.jpg")
-            } else if (blusScore > redsScore){
-                winnerMsg.innerText = "BLUE WiNS!"
-                winnerPanel.style = "background-color: rgb(125, 125, 255);"
-                winnerPrice.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQZQM9b_Vx4gbAcfSbzkZqEvmd6pwjH3ZfmyQ&usqp=CAU")
-            } else if (blusScore == redsScore){
-                winnerMsg.innerText = "ITS A DRAW!"
-                winnerPanel.style = "background-color: rgb(73, 73, 73);"
-                winnerPrice.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzC4cB1aHZjeIDcomxGPjD-sf1F9q2M8cCXw&usqp=CAU")
-            }
-        }
-    }
-    
-    playSwpper()
-   // player swapper...               
-   function playSwpper(){
-    if (playToken == "redsplay") {
-        playToken = "blusplay"
-    } else if (playToken == "blusplay"){
-        playToken = "redsplay"
-    }
-    }
-    
-}
-
-// initiator...
-function startGame(){
-    table.classList.add(playToken);
-}
-function play(){
-    starterWindow.classList.remove("startedgame");
-    starterWindow.classList.add("startgame");
-    winnerPanel.classList.remove("endedgame");
-    winnerPanel.classList.add("endgame");
-}
-
-function readRules(){
-    if ( rulesSheet.getAttribute("class") == "rules" ){
-        rulesSheet.classList.add("readrules");
-        rulesSheet.classList.remove("rules");
-    } else if ( rulesSheet.getAttribute("class") == "readrules" ){
-        rulesSheet.classList.add("rules");
-        rulesSheet.classList.remove("readrules");
-    }
-}
+    };
+};

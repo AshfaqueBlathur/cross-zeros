@@ -1,0 +1,23 @@
+{
+    "theme_color": "#35f67e",
+    "background_color": "#80f635",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "/",
+    "description": "An Online Dual Experience!",
+    "name": "Cross Zeros",
+    "short_name": "Cross Zeros",
+    "icons":
+        [
+            {
+                "src":"img/android-chrome-192x192.png",
+                "sizes":"192x192",
+                "type":"image/png"
+            },
+            {   
+                "src":"img/android-chrome-512x512.png",
+                "sizes":"512x512",
+                "type":"image/png"
+            }
+        ]
+}
