@@ -123,8 +123,7 @@ const crossed = (e, r, c) => {
         col = Array.from(document.querySelectorAll(`.${c}`)),
         rowScored = row.every(isCrossed),
         colScored = col.every(isCrossed);
-
-    if(rowScored || colScored){
+    if((rowScored || colScored) && ((row.length || col.length) != 1)){
         // fuker scored
         if (rowScored){
             score = (row.length);
@@ -253,6 +252,7 @@ peer.on('error', err => {
 var conn;
 
 const joinGame = () => {
+    event.preventDefault();
     if (myPeerId != undefined){
         let peerId = joinForm.peerId.value;
         conn = peer.connect(peerId);
