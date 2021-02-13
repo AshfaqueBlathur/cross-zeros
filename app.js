@@ -54,36 +54,26 @@ const msg = () => {
 
 
 
-// share peer id
-const share = async () => {
-    if (inviteUrl != undefined){
-        let inviteObj = {
-            title: 'Cross Zeros Invitation',
-            text: 'Come, lets play Cross Zeros',
-            url: inviteUrl,
-        }
-        try {
-            await navigator.share(inviteObj)
-            toast('link shared')
-        } catch (err) {
-            toast(err);
-        };
-    };
-};
-
 // Game ...
 const gameTable = document.querySelector('.game-wrap'),
       aScoreBoard = document.querySelector('.aScore'),
-      bScoreBoard = document.querySelector('.bScore');
+      bScoreBoard = document.querySelector('.bScore'),
+      msgUl = document.querySelector('.msgs'),
+      endScreen = document.querySelector('.endScreen'),
+      winnerDisplay = document.querySelector('.winner'),
+      zerosArray = Array.from(document.querySelectorAll('.zeros')),
+      restartBtn = document.getElementById('restart');
+
 var aScore = 0,
     bScore = 0,
     myTurn,
     opTurn,
-    crossedZeros = [];
+    crossedZeros = [],
+    randNum = Math.random();
 
 // first turn finder
 const firstTurn = () => {
-    if (randNum < 500){
+    if (randNum < 0.5){
         return true;
     } else {
         return false;
@@ -99,7 +89,6 @@ if (firstTurn()){
     opTurn = true;
 };
 
-
 // table color init
 const initiateTable = () => {
     if (myTurn){
@@ -110,6 +99,7 @@ const initiateTable = () => {
         gameTable.classList.remove('myTurn');
     };
 };
+
 initiateTable();
 
 const crossed = (e, r, c) => {
@@ -138,8 +128,12 @@ const crossed = (e, r, c) => {
         // fuker scored
         if (rowScored){
             score = (row.length);
-        } else if (colScored){
+        };
+        if (colScored){
             score = (col.length);
+        };
+        if (rowScored && colScored){
+            score = (row.length) + (col.length);
         };
         // score adding
         if (myTurn){
@@ -167,12 +161,17 @@ const crossed = (e, r, c) => {
     //console.log(aScore + ' v/s ' + bScore);
     let zeros = Array.from(document.querySelectorAll('.zeros'));
     if (zeros.every(zero => zero.getAttribute('data-cross') == 'crossed')){
+        endScreen.style.display = 'flex';
         if (aScore > bScore){
-            alert('i won, restart browser for a new game..');
+            winnerDisplay.innerHTML = '<span>💃</span><span>you won!</span>';
+            toast('you won..');
         } else if (bScore > aScore){
-            alert('opponent won, restart browser for a new game..');
+            winnerDisplay.innerHTML = '<span>💥</span><span>opponent won.</span>';
+            msg('come on you jur*... i will beat you next time ＞︿＜');
+            toast('opponent won..');
         } else if (aScore == bScore){
-            alert('its a tie, restart browser for a new game..')
+            winnerDisplay.innerHTML = "<span>💢</span><span>it's a tie..</span>";
+            toast('its a tie..')
         };
     };
 };     
@@ -185,7 +184,19 @@ const isCrossed = (zero) => {
     }; 
 };
 
-
+const restart = () => {
+    crossedZeros = [];
+    zerosArray.forEach(zero => {
+        zero.setAttribute('data-cross', '');
+        zero.classList.remove('crossed_by_me');
+        zero.classList.remove('crossed_by_op');
+    });
+    aScore = 0;
+    bScore = 0;
+    aScoreBoard.innerText = aScore;
+    bScoreBoard.innerText = bScore;
+    endScreen.style.display = 'none';
+};
 
 const joinForm = document.querySelector('.joinForm');
 // recieve hash peer
@@ -204,11 +215,31 @@ var peer = new Peer(),
 
 peer.on('open', id => {
     myPeerId = id;
-    inviteUrl = `https://cross-zeros.web.app#${myPeerId}`;
+    inviteUrl = `https://cross-zeros.github.io#${myPeerId}`;
     toast('my peer is: ' + id);
     peerDisplay.innerHTML = `${id}`;
     new QRCode(document.getElementById("qrcode"), inviteUrl);
 });
+
+
+// share peer id
+const share = async () => {
+    if (inviteUrl != undefined){
+        let inviteObj = {
+            title: 'Cross Zeros Invitation',
+            text: 'Come, lets play Cross Zeros',
+            url: inviteUrl,
+        }
+        try {
+            await navigator.share(inviteObj)
+            toast('link shared...')
+        } catch (err) {
+            toast(err);
+        };
+    };
+};
+
+
 
 // error
 peer.on('error', function(err) {
@@ -216,8 +247,7 @@ peer.on('error', function(err) {
 });
 
 // join a game
-var conn,
-    randNum = Math.floor(Math.random()*1000);
+var conn;
 
 const joinGame = () => {
     let peerId = joinForm.peerId.value;
@@ -226,7 +256,7 @@ const joinGame = () => {
     conn.on('open', () => {
         conn.send(['myPeerId', myPeerId]);
         conn.send(['firstTurn', firstTurn()]);
-        //console.log(firstTurn());
+        console.log(firstTurn());
         // close connection tab
         joinForm.style.display = 'none';
     });
@@ -248,16 +278,18 @@ const send = (msg) => {
 };
 
 
-const msgUl = document.querySelector('.msgs');
 // recieve msg
 const recieve = (data) => {
+
     console.log(data);
+
     switch (data[0]) {
         case 'myPeerId':
 
             // swap on recieving conn
             myTurn = !myTurn;
             opTurn = !opTurn;
+
             // connect to him
             if (!duplex){
                 let opponentPeerId = data[1];
@@ -271,10 +303,10 @@ const recieve = (data) => {
 
         case 'firstTurn':
         
-            let firstTurn = data[1];
-            //console.log(firstTurn);
+            let firstTurn = !data[1];
+            console.log(firstTurn);
             
-            if (!firstTurn){
+            if (firstTurn){
                 myTurn = true;
                 opTurn = false;
             } else {
@@ -302,5 +334,12 @@ const recieve = (data) => {
             li.scrollIntoView();
             break;
 
+        case 'restart':
+
+            restartBtn.click();
+            toast('opponent ready for pla again.');
+            break;
+
     };
+
 };

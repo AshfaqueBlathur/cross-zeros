@@ -89,14 +89,14 @@
 
             <ul class="fabs">
                 <li class="aboutTrig" onclick="trig('about')">👻</li>
-                <li class="scoreTrig" onclick="trig('score')">💰</li>
-                <li class="chatTrig" onclick="trig('chat')">🗨</li>
+                <li class="scoreTrig" onclick="trig('score')">💯</li>
+                <li class="chatTrig" onclick="trig('chat')">💬</li>
             </ul>
 
             <div class="about">
                 <div class="aout_wrap">
-                    <h2>👦</h2>
-                    <h3>created by me <a href="http://">(who?)</a></h3>
+                    <h2>💝</h2>
+                    <h3>created by me <a href="http://ashfaqueblathur.github.io/">(who?)</a></h3>
                     <p>Cross zeros is an ancient pen and paper game. Usually played by two or more players. (for the sake of some technical issues this game currently only supports 1 v/s 1 onlie)</p>
                     <ul>
                         <li>How To Play!</li>
@@ -106,6 +106,7 @@
                         <li>on crossing a row or coloumn completely the one making the last move will be granded with the length of respective row or coloumn.</li>
                         <li>on crossing all the zeros present, the game will declare its winner by means of score.</li>
                         <li>you should ensure a relible connection otherwise the opponent will be won without any further notice :)</li>
+                        <li>the one who wins will get the first turn on restarting the game!</li>
                     </ul>
                 </div>
             </div>
@@ -130,6 +131,11 @@
                     <input type="text" name="msg" id="msg" placeholder="type . . .">
                     <button onclick="msg()">🚀</button>
                 </div>
+            </div>
+
+            <div class="endScreen">
+                <h4 class="winner"></h4>
+                <button onclick="restart()" id="restart">♻ play again ♻</button>
             </div>
 
         </div>
