@@ -80,6 +80,7 @@ body{
     align-content: center;
 }
     .joinForm p{
+        margin-top: 10vh;
         letter-spacing: 6px;
         margin: 10px 0;
         text-shadow: -1px 1px 3px #000;
@@ -116,15 +117,7 @@ body{
         width: 60%;
         padding: 5px;
         margin-top: 10px;
-    }
-    .joinForm #qrcode{
-        margin-top: 10vh;
-    }
-        .joinForm #qrcode img{
-            margin: 0 auto;
-            box-shadow: -1px 1px 100px rgb(177, 177, 177),
-                        1px -1px 100px rgb(170, 170, 170);
-        }
+    } 
     .joinForm button{
         width: 40%;
         margin: 10px auto;
@@ -135,7 +128,16 @@ body{
         cursor: pointer;
         letter-spacing: 5px;
         text-transform: uppercase;
+        box-shadow: -1px 1px  rgb(0, 0, 0),
+                    1px -1px  rgb(0, 0, 0);
     }
+    .joinForm #qrcode{
+        margin: 20px auto;
+    }
+        .joinForm #qrcode img{
+            margin: 0 auto;
+        }
+   
 
 
 /* game section */

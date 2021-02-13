@@ -256,7 +256,9 @@ const joinGame = () => {
     if (myPeerId != undefined){
         let peerId = joinForm.peerId.value;
         conn = peer.connect(peerId);
-        
+        conn.on('error', err => {
+            toast(err);
+        });
         conn.on('open', () => {
             conn.send(['myPeerId', myPeerId]);
             conn.send(['firstTurn', firstTurn()]);
@@ -268,10 +270,6 @@ const joinGame = () => {
         toast('wait....');
     };
 };
-
-conn.on('error', err => {
-    toast(err);
-});
 
 // send msg
 const send = (msg) => {
@@ -301,7 +299,10 @@ const recieve = (data) => {
             // connect to him
             if (!duplex){
                 let opponentPeerId = data[1];
-                conn = peer.connect(opponentPeerId);
+                conn = peer.connect(opponentPeerId);          
+                conn.on('error', err => {
+                    toast(err);
+                });
                 conn.on('open', () => {
                     joinForm.style.display = 'none';
                 });
