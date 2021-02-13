@@ -9,21 +9,25 @@
   </head>
   <body>
         <div class="wrapper">
+
             <div class="toastBlock">
             </div>
+
             <div class="head">
                 <h1>cross zeros</h1>
                 <h4>an online dual experience!</h4>
             </div>
+
             <form class="joinForm">
-                <div id="qrcode"></div>
                 <p>your peer id is:</p>
                 <b class="peerIdDisplay">wait...</b>
                 <span onclick="share()">🔗 share</span>
                 <label for="peerId">ask your opponent to scan the qr code or type your opponents peer id below, then tap begin to start the game.</label>
                 <input type="text" name="peerId" id="peerId" placeholder="opponents peer id ...">
-                <button type="button" onclick="joinGame()">begin . . .</button>
+                <div id="qrcode"></div>
+                <button type="button" onclick="joinGame()">begin</button>
             </form>
+
             <div class="game-wrap">
                 <div class="mask">
                     <p><span>🛑</span><b>wait until opponent makes a move</b></p>
@@ -135,7 +139,7 @@
 
             <div class="endScreen">
                 <h4 class="winner"></h4>
-                <button onclick="restart()" id="restart">♻ play again ♻</button>
+                <button onclick="restart(true)" id="restart">play again</button>
             </div>
 
         </div>

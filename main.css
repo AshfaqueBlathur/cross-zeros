@@ -79,26 +79,17 @@ body{
     justify-content: center;
     align-content: center;
 }
-    .joinForm #qrcode{
-        margin-top: 10vh;
-    }
-    .joinForm #qrcode img{
-        margin: 0 auto;
-        box-shadow: -1px 1px 100px rgb(177, 177, 177),
-                    1px -1px 100px rgb(170, 170, 170);
-    }
     .joinForm p{
         letter-spacing: 6px;
         margin: 10px 0;
         text-shadow: -1px 1px 3px #000;
     }
     .joinForm .peerIdDisplay{
-        color: rgb(255, 255, 255);
+        color: rgb(255, 252, 56);
         font-size: larger;
-        padding: 5px 10px;
+        padding: 5px 0;
         letter-spacing: 8px;
-        box-shadow: -1px 1px 2px rgb(145, 145, 145);
-        text-shadow: -1px 1px 3px #000;
+        text-shadow: -1px 0 rgb(255, 68, 68);
     }
     .joinForm span{
         display: inline-block;
@@ -107,8 +98,8 @@ body{
         text-transform: uppercase;
         letter-spacing: 4px;
         padding: 5px;
-        width: 40%;
-        margin: 10px 30%;
+        width: 20%;
+        margin: 10px auto;
         box-shadow: -1px 1px 3px rgb(0, 0, 0);
         cursor: pointer;
     }
@@ -122,16 +113,28 @@ body{
         text-shadow: -1px 1px 3px #000;
     }
     .joinForm input{
-        width: 75%;
+        width: 60%;
         padding: 5px;
         margin-top: 10px;
     }
+    .joinForm #qrcode{
+        margin-top: 10vh;
+    }
+        .joinForm #qrcode img{
+            margin: 0 auto;
+            box-shadow: -1px 1px 100px rgb(177, 177, 177),
+                        1px -1px 100px rgb(170, 170, 170);
+        }
     .joinForm button{
-        width: 50%;
-        padding: 5px;
-        margin: 10px 0;
+        width: 40%;
+        margin: 10px auto;
+        background-color: rgb(0, 175, 9);
+        display: block;
+        padding: 15px;
+        border-width: 0;
         cursor: pointer;
-        background-color: rgb(120, 168, 76);
+        letter-spacing: 5px;
+        text-transform: uppercase;
     }
 
 
@@ -214,10 +217,10 @@ body{
                     cursor: pointer;
                 }
                 .game .crossed_by_me{
-                    background-color: rgb(104, 255, 255);
+                    background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(104, 255, 104) 100%);
                 }
                 .game .crossed_by_op{
-                    background-color: rgb(255, 5, 5);
+                    background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(255, 88, 22) 100%);
                 }
 
 
@@ -449,4 +452,5 @@ body{
             margin: 20px 35%;
             border-width: 0;
             cursor: pointer;
+            text-transform: uppercase;
         }

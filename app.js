@@ -184,7 +184,7 @@ const isCrossed = (zero) => {
     }; 
 };
 
-const restart = () => {
+const restart = (isFromClick) => {
     crossedZeros = [];
     zerosArray.forEach(zero => {
         zero.setAttribute('data-cross', '');
@@ -196,6 +196,9 @@ const restart = () => {
     aScoreBoard.innerText = aScore;
     bScoreBoard.innerText = bScore;
     endScreen.style.display = 'none';
+    if (isFromClick){
+        send(['restart']);
+    };
 };
 
 const joinForm = document.querySelector('.joinForm');
@@ -242,7 +245,7 @@ const share = async () => {
 
 
 // error
-peer.on('error', function(err) {
+peer.on('error', err => {
     toast(err);
 });
 
@@ -250,24 +253,24 @@ peer.on('error', function(err) {
 var conn;
 
 const joinGame = () => {
-    let peerId = joinForm.peerId.value;
-    conn = peer.connect(peerId);
-    
-    conn.on('open', () => {
-        conn.send(['myPeerId', myPeerId]);
-        conn.send(['firstTurn', firstTurn()]);
-        console.log(firstTurn());
-        // close connection tab
-        joinForm.style.display = 'none';
-    });
+    if (myPeerId != undefined){
+        let peerId = joinForm.peerId.value;
+        conn = peer.connect(peerId);
+        
+        conn.on('open', () => {
+            conn.send(['myPeerId', myPeerId]);
+            conn.send(['firstTurn', firstTurn()]);
+            console.log(firstTurn());
+            // close connection tab
+            joinForm.style.display = 'none';
+        });
+    } else {
+        toast('wait....');
+    };
 };
 
-
-// recive a connection
-peer.on('connection', function(c) {
-    c.on('data', data => {
-        recieve(data);
-    });
+conn.on('error', err => {
+    toast(err);
 });
 
 // send msg
@@ -277,11 +280,16 @@ const send = (msg) => {
     }
 };
 
+// recive a connection
+peer.on('connection', function(c) {
+    c.on('data', data => {
+        recieve(data);
+    });
+});
+
 
 // recieve msg
 const recieve = (data) => {
-
-    console.log(data);
 
     switch (data[0]) {
         case 'myPeerId':
@@ -318,6 +326,7 @@ const recieve = (data) => {
 
         case 'crossed':
 
+            toast(data[1]);
             let zero = document.querySelector(`.${data[1]}`);
             crossedZeros.push(zero);
             zero.click();
@@ -336,7 +345,7 @@ const recieve = (data) => {
 
         case 'restart':
 
-            restartBtn.click();
+            restart(false);
             toast('opponent ready for pla again.');
             break;
 
