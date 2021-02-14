@@ -1,0 +1,484 @@
+@font-face {
+    font-family: fff;
+    src: url(ARCADECLASSIC.TTF);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    color: rgb(255, 255, 255);
+    background-color: rgb(20, 20, 20);
+    font-family: fff;
+}
+
+:root{
+    --side: 100vw;
+}
+
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.toastBlock{
+    z-index: 1000;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 10vh;
+}
+    .toastBlock p{
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 5px;
+        text-align: center;
+        font-size: large;
+        letter-spacing: 2px;
+        font-family: monospace;
+        color: #000;
+        background: rgb(224, 177, 177);
+    }
+
+.head{
+    display: block;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    text-transform: uppercase;
+}
+            .head h1{
+                letter-spacing: 2px;
+                color: rgb(0, 179, 75);
+                text-shadow: -2px 0 rgb(125, 255, 98),
+                             -4px 0 rgb(255, 42, 42);
+                line-height: 6vh;
+            }
+            .head h4{
+                letter-spacing: 3px;
+                line-height: 4vh;
+            }
+
+
+.joinForm{
+    z-index: 1000;
+    width: 100%;
+    height: 90vh;
+    position: fixed;
+    top: 10vh;
+    background-color: rgb(27, 27, 27);
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+    .joinForm p{
+        letter-spacing: 6px;
+        margin: 10px 0;
+        text-shadow: -1px 1px 3px #000;
+    }
+    .joinForm .peerIdDisplay{
+        color: rgb(255, 252, 56);
+        font-size: larger;
+        padding: 5px 0;
+        letter-spacing: 8px;
+        text-shadow: -1px 0 rgb(255, 68, 68);
+    }
+    .joinForm span{
+        display: inline-block;
+        background-color: rgb(0, 128, 85);
+        font-size: small;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        padding: 5px;
+        width: 35%;
+        margin: 10px auto;
+        box-shadow: -1px 1px 3px rgb(0, 0, 0);
+        cursor: pointer;
+    }
+    .joinForm label{
+        display: inline-block;
+        letter-spacing: 2px;
+        font-size: small;
+        width: 100%;
+        padding: 0 20px;
+        margin-top: 25px;
+        text-shadow: -1px 1px 3px #000;
+    }
+    .joinForm input{
+        width: 60%;
+        padding: 5px;
+        margin-top: 10px;
+    } 
+    .joinForm button{
+        width: 40%;
+        margin: 10px auto;
+        background-color: rgb(0, 175, 9);
+        display: block;
+        padding: 15px;
+        border-width: 0;
+        cursor: pointer;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        box-shadow: -1px 1px  rgb(0, 0, 0),
+                    1px -1px  rgb(0, 0, 0);
+    }
+    .joinForm #qrcode{
+        margin: 20px auto;
+    }
+        .joinForm #qrcode img{
+            margin: 0 auto;
+        }
+   
+
+
+/* game section */
+.game-wrap{
+    position: fixed;
+    top: 10vh;
+    padding: 3px;
+    width: 100%;
+    height: 50vh;
+    border: 2px #000 solid;
+}
+.myTurn{
+    background-color: rgb(108, 190, 190);
+}
+            .myTurn .mask{
+                z-index: -900;
+                opacity: 0;
+            }
+.opTurn{
+    background-color: rgb(214, 99, 99);
+}
+            .opTurn .mask{
+                z-index: 900;
+                opacity: 0.9;
+            }
+
+    .mask{
+        height: 100%;
+        width: 100%;
+        position: relative;
+        top: 0;
+        background-color: rgb(0, 0, 0);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+    }
+        .mask p{
+            display: block;
+            width: 60%;
+            margin: 0 20%;
+        }
+            .mask p span{
+                display: block;
+                width: 80px;
+                margin: 0 calc((100% - 80px) / 2);
+                height: 80px;
+                font-size: 55px;
+                text-shadow: -1px 1px 50px rgb(177, 177, 177),
+                            1px -1px 50px rgb(170, 170, 170);
+            }
+            .mask p b{
+                display: block;
+                color: rgb(233, 210, 0);
+                letter-spacing: 3px;
+            }
+    .game{
+        height: 100%;
+        position: relative;
+        top: -100%;
+        display: grid;
+        grid-template-columns: repeat(10,1fr);
+        grid-template-rows: repeat(10,1fr);
+        grid-template-areas:'area1 . . . . . . . . .'
+                            'area2 area3 . . . . . about about .'
+                            'area4 area5 area6 . . . . about about .'
+                            'area7 area8 area9 area10 . . . . . .'
+                            'area11 area12 area13 area14 area15 . . . . .'
+                            'area16 area17 area18 area19 area20 area21 . . . .'
+                            'area22 area23 area24 area25 area26 area27 area28 . . .'
+                            'area29 area30 area31 area32 area33 area34 area35 area36 . .'
+                            'area37 area38 area39 area40 area41 area42 area43 area44 area45 .'
+                            'area46 area47 area48 area49 area50 area51 area52 area53 area54 area55';
+    }
+                .game .zeros{
+                    margin: 3px;
+                    border-radius: 50%;
+                    border: 2px rgb(0, 0, 0) solid;
+                    cursor: pointer;
+                }
+                .game .crossed_by_me{
+                    background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(104, 255, 104) 100%);
+                }
+                .game .crossed_by_op{
+                    background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(255, 88, 22) 100%);
+                }
+
+
+    .fabs{
+        position: fixed;
+        bottom: 0;
+        z-index: 90;
+        width: 100%;
+        height: 40px;
+        display: flex;
+    }
+        .fabs li{
+            list-style: none;
+            width: 50%;
+            padding: 5px 20%;
+            text-shadow: #000 -1px 1px;
+            height: 40px;
+            cursor: pointer;
+            border: rgb(0, 0, 0) solid;
+            border-width: 1px 2px 0 2px;
+        }
+        .fabs .scoreTrig{
+            background-color: rgb(184, 184, 184);
+        }
+        .fabs .chatTrig{
+            background-color: rgb(0, 48, 41);
+        }
+
+
+
+                                        .chat, .score{
+                                            position: fixed;
+                                            top: 60vh;
+                                            bottom: 40px;
+                                            left: 0px;
+                                            right: 0;
+                                            border-top: #000 1px solid;
+                                        }
+
+
+
+                                        .score{
+                                            z-index: 10;
+                                            background-color: rgb(184, 184, 184);
+                                            color: #000;
+                                            text-align: center;
+                                            padding: 0 20px;
+                                        }
+                                            .score span{
+                                                color: rgb(226, 43, 43);
+                                                font-size: 80px;
+                                            }
+                                                .score .a{
+                                                    float: left;
+                                                    width: 50%;
+                                                    border: rgb(58, 58, 58) solid;
+                                                    border-width: 0 2px 0 0;
+                                                }
+                                                .score .b{
+                                                    float: right;
+                                                    width: 50%;
+                                                    border: rgb(255, 82, 82) solid;
+                                                    border-width: 0 0 0 2px;
+                                                }
+
+                                        .chat{
+                                            z-index: 8;
+                                            background-color: rgb(0, 48, 41);
+                                        }
+                                                .chat .typer_div{
+                                                    position: absolute;
+                                                    bottom: 0;
+                                                    width: 100%;
+                                                    height: 40px;
+                                                }
+                                                        .typer_div #msg{
+                                                            width: calc(100% - 40px);
+                                                            height: 38px;
+                                                            border-width: 0;
+                                                            padding: 0 5px;
+                                                            background-color: rgb(0, 100, 85);
+                                                            color: rgb(255, 255, 255);
+                                                        }
+                                                        .typer_div button{
+                                                            width: 40px;
+                                                            height: 38px;
+                                                            float: right;
+                                                            background-color: rgb(0, 131, 59);
+                                                            border-width: 0;
+                                                            cursor: pointer;
+                                                        }
+                                                .msgs{
+                                                    position: absolute;
+                                                    top: 0;
+                                                    bottom: 32px;
+                                                    width: 100%;
+                                                    background-color: rgb(0, 48, 41);
+                                                    padding: 3px;
+                                                    font-size: small;
+                                                    overflow-y: scroll;
+                                                    scrollbar-width: none;
+                                                }
+                                                .msgs::-webkit-scrollbar{
+                                                    display: none;
+                                                }
+                                                        .msgs li{
+                                                            list-style: none;
+                                                            display: inline-block;
+                                                            font-family: monospace;
+                                                            font-size: medium;
+                                                            width: 80%;
+                                                            padding: 2px 10px;
+                                                            margin: 3px 0;
+                                                            letter-spacing: 2px;
+                                                            line-height: 15px;
+                                                            color: rgb(0, 0, 0);
+                                                            text-shadow: 0 1px rgb(10, 10, 10);
+                                                        }
+                                                        .msgs .me{
+                                                            float: right;
+                                                            border-radius: 10px 10px 0 10px;
+                                                            text-align: right;
+                                                            background-color: rgba(129, 129, 129, 0.781);
+                                                            box-shadow: 1px 0.5px rgb(255, 255, 255);
+                                                        }
+                                                        .msgs .op{
+                                                            float: left;
+                                                            border-radius: 10px 10px 10px 0;
+                                                            background-color: rgba(163, 163, 163, 0.781);
+                                                            box-shadow: -1px 0.5px rgb(255, 255, 255);
+                                                        }
+
+
+
+
+
+
+                .about_trig{
+                    grid-area: about;
+                    z-index: 90;
+                    font-size: 40px;
+                    cursor: pointer;
+                    animation: scaler 3s ease-out infinite;
+                }
+                @keyframes scaler{
+                    0%, 100%{
+                        scale: 1;
+                    }
+                    20%{
+                        scale: 1.2;
+                    }
+                }
+
+                .about{
+                    display: none;
+                    width: 100%;
+                    height: 90vh;
+                    position: fixed;
+                    top: 10vh;
+                    z-index: 1000;
+                    background-color: rgb(58, 58, 58);
+                    color: rgb(255, 255, 255);
+                    overflow-y: scroll;
+                    scrollbar-width: none;
+                }
+                .about::-webkit-scrollbar{
+                    display: none;
+                }
+                            .about .aout_wrap{
+                                text-transform: uppercase;
+                                text-align: center;
+                            }
+                                        
+                                        .aout_wrap p{
+                                            padding: 10px 5px;
+                                            letter-spacing: 2px;
+                                        }
+                                        .aout_wrap h3{
+                                            text-decoration: underline;
+                                            margin-top: 5px;
+                                        }
+                                        .aout_wrap h3 a:any-link{
+                                            color: aqua;
+                                            text-decoration: none;
+                                        }
+                                        .aout_wrap ul{
+                                            padding: 0 10px;
+                                        }
+                                                .aout_wrap ul li{
+                                                    list-style: none;
+                                                    text-align: justify;
+                                                    letter-spacing: 2px;
+                                                    margin-top: 10px;
+                                                }
+                                                .aout_wrap ul li:first-child{
+                                                    letter-spacing: 3px;
+                                                    text-align: center;
+                                                    font-size: large;
+                                                    text-decoration: underline;
+                                                    text-transform: uppercase;
+                                                    padding-top: 10px;
+                                                }
+                                            .closer{
+                                                display: block;
+                                                width: 100%;
+                                                padding: 10px 0;
+                                                cursor: pointer;
+                                                border-width: 0;
+                                                text-transform: uppercase;
+                                                margin: 10px 0 0 0;
+                                                color: #000;
+                                                background-color: rgb(235, 158, 158);
+                                            }
+                
+
+
+
+
+
+
+
+
+.endScreen{
+    z-index: 1000;
+    width: 100%;
+    height: 50vh;
+    position: fixed;
+    top: 10vh;
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(53, 53, 53);
+}
+        .winner{
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+            .winner span:first-child{
+                display: block;
+                width: 100%;
+                font-size: 100px;
+            }
+            .winner span:last-child{
+                display: block;
+                width: 100%;
+                font-size: 50px;
+                text-transform: uppercase;
+            }
+        .endScreen button{
+            display: block;
+            width: 30%;
+            padding: 15px;
+            margin: 20px 35%;
+            border-width: 0;
+            cursor: pointer;
+            text-transform: uppercase;
+        }

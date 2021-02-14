@@ -8,18 +8,17 @@ const trig = (target) => {
         case 'about':
             // open about
             about.style.display = 'block';
-            score.style.display = 'none';
-            chat.style.display = 'none';
             break;
-        case 'score':
-            // open about
+        case 'close_about':
+            // close about
             about.style.display = 'none';
+        case 'score':
+            // open score
             score.style.display = 'block';
             chat.style.display = 'none';
             break;
         case 'chat':
             // open chgat
-            about.style.display = 'none';
             score.style.display = 'none';
             chat.style.display = 'block';
             break;
@@ -123,7 +122,7 @@ const crossed = (e, r, c) => {
         col = Array.from(document.querySelectorAll(`.${c}`)),
         rowScored = row.every(isCrossed),
         colScored = col.every(isCrossed);
-    if((rowScored || colScored) && ((row.length || col.length) != 1)){
+    if((rowScored || colScored) && (row.length != 1) && (col.length != 1)){
         // fuker scored
         if (rowScored){
             score = (row.length);
@@ -217,10 +216,16 @@ var peer = new Peer(),
 
 peer.on('open', id => {
     myPeerId = id;
-    inviteUrl = `https://cross-zeros.github.io#${myPeerId}`;
+    inviteUrl = `https://cross-zeros.github.io/public#${myPeerId}`;
     toast('my peer is: ' + id);
     peerDisplay.innerHTML = `${id}`;
-    new QRCode(document.getElementById("qrcode"), inviteUrl);
+    new QRCode("qrcode", {
+        text: inviteUrl,
+        width: 150,
+        height: 150,
+        colorDark : "#000000",
+        colorLight : "#ffffff"
+    });
 });
 
 
