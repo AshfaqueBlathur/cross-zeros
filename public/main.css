@@ -150,7 +150,7 @@ body{
     border: 2px #000 solid;
 }
 .myTurn{
-    background-color: rgb(108, 190, 190);
+    background-color: rgb(72, 189, 189);
 }
             .myTurn .mask{
                 z-index: -900;
@@ -161,7 +161,7 @@ body{
 }
             .opTurn .mask{
                 z-index: 900;
-                opacity: 0.9;
+                opacity: .8;
             }
 
     .mask{
@@ -186,14 +186,19 @@ body{
                 margin: 0 calc((100% - 80px) / 2);
                 height: 80px;
                 font-size: 55px;
-                text-shadow: -1px 1px 50px rgb(177, 177, 177),
-                            1px -1px 50px rgb(170, 170, 170);
+                border-radius: 50%;
+                box-shadow: -1px 1px 50px rgb(255, 255, 255),
+                            1px -1px 50px rgb(255, 42, 42);
             }
             .mask p b{
                 display: block;
-                color: rgb(233, 210, 0);
-                letter-spacing: 3px;
+                color: rgb(233, 74, 0);
+                letter-spacing: 6px;
+                font-size: larger;
+                text-shadow: -2px 0 rgb(255, 255, 255);
             }
+
+
     .game{
         height: 100%;
         position: relative;
@@ -219,10 +224,26 @@ body{
                     cursor: pointer;
                 }
                 .game .crossed_by_me{
-                    background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(104, 255, 104) 100%);
+                    animation: cross_by_me 2s forwards;
+                }
+                @keyframes cross_by_me{
+                     from{
+                        background: rgb(255, 238, 0);
+                    }
+                    to{
+                        background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(104, 255, 104) 100%);                    }
                 }
                 .game .crossed_by_op{
-                    background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(255, 88, 22) 100%);
+                    animation: cross_by_op 2s forwards;
+                    
+                }
+                @keyframes cross_by_op{
+                    from{
+                        background: rgb(255, 238, 0);
+                    }
+                    to{
+                        background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(255, 88, 22) 100%);
+                    }
                 }
 
 
@@ -372,7 +393,7 @@ body{
 
                 .about_trig{
                     grid-area: about;
-                    z-index: 90;
+                    z-index: 900;
                     font-size: 40px;
                     cursor: pointer;
                     animation: scaler 3s ease-out infinite;
@@ -404,6 +425,7 @@ body{
                             .about .aout_wrap{
                                 text-transform: uppercase;
                                 text-align: center;
+                                min-height: 90vh;
                             }
                                         
                                         .aout_wrap p{
@@ -445,14 +467,9 @@ body{
                                                 margin: 10px 0 0 0;
                                                 color: #000;
                                                 background-color: rgb(235, 158, 158);
+                                                position: absolute;
+                                                bottom: 0;
                                             }
-                
-
-
-
-
-
-
 
 
 .endScreen{
@@ -492,3 +509,36 @@ body{
             cursor: pointer;
             text-transform: uppercase;
         }
+
+
+
+
+
+
+
+        
+    @media only screen and (min-width : 640px){
+        .game{
+            width: 50vh;
+            margin: 0 auto;
+        }
+        .fabs{
+            display: none;
+        }
+        .chat, .score{
+            position: fixed;
+            top: 60vh;
+            bottom: 0;
+            display: block;
+            border-top: #000 1px solid;
+        }
+        .score{
+            width: 40%;
+            left: 0;
+        }
+        .chat{
+            width: 60%;
+            left: auto;
+            right: 0;
+        }
+    }

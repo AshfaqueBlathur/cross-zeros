@@ -24,7 +24,13 @@ const trig = (target) => {
             break;
     };
 };
-trig('score');
+
+window.onresize = () => {
+    if(window.innerWidth > 640){
+    score.style.display = 'block';
+    chat.style.display = 'block';
+};
+};
 
 const toastBlock = document.querySelector('.toastBlock');
 const toast = (tst) => {
@@ -106,6 +112,8 @@ const crossed = (e, r, c) => {
     // send cross to opp
     if (!crossedZeros.includes(e)){
         send(['crossed', e.classList[1]]);
+        send(['crossed', e.classList[1]]);
+        send(['crossed', e.classList[1]]);
         crossedZeros.push(e);
     };
 
@@ -117,6 +125,8 @@ const crossed = (e, r, c) => {
     };
 
     e.setAttribute('data-cross', 'crossed');
+    e.setAttribute('onclick', '');
+
     let score = 0,
         row = Array.from(document.querySelectorAll(`.${r}`)),
         col = Array.from(document.querySelectorAll(`.${c}`)),
@@ -124,14 +134,38 @@ const crossed = (e, r, c) => {
         colScored = col.every(isCrossed);
     if((rowScored || colScored) && (row.length != 1) && (col.length != 1)){
         // fuker scored
-        if (rowScored){
+        if (rowScored && !colScored){
             score = (row.length);
+            row.forEach(zero => {
+                zero.style.borderWidth = '15px';
+                setTimeout(() => {
+                    zero.style.borderWidth = '2px';
+                }, 2000);
+            });
         };
-        if (colScored){
+        if (colScored && !rowScored){
             score = (col.length);
+            col.forEach(zero => {
+                zero.style.borderWidth = '15px';
+                setTimeout(() => {
+                    zero.style.borderWidth = '2px';
+                }, 2000);
+            });
         };
         if (rowScored && colScored){
             score = (row.length) + (col.length);
+            row.forEach(zero => {
+                zero.style.borderWidth = '15px';
+                setTimeout(() => {
+                    zero.style.borderWidth = '2px';
+                }, 2000);
+            });
+            col.forEach(zero => {
+                zero.style.borderWidth = '15px';
+                setTimeout(() => {
+                    zero.style.borderWidth = '2px';
+                }, 2000);
+            });
         };
         // score adding
         if (myTurn){
