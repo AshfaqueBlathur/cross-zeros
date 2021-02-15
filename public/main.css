@@ -199,18 +199,18 @@ body{
         position: relative;
         top: -100%;
         display: grid;
-        grid-template-columns: repeat(10,1fr);
-        grid-template-rows: repeat(10,1fr);
-        grid-template-areas:'area1 . . . . . . . . .'
-                            'area2 area3 . . . . . about about .'
-                            'area4 area5 area6 . . . . about about .'
-                            'area7 area8 area9 area10 . . . . . .'
-                            'area11 area12 area13 area14 area15 . . . . .'
-                            'area16 area17 area18 area19 area20 area21 . . . .'
-                            'area22 area23 area24 area25 area26 area27 area28 . . .'
-                            'area29 area30 area31 area32 area33 area34 area35 area36 . .'
+        grid-template-columns: repeat(8,1fr);
+        grid-template-rows: repeat(8,1fr);
+        grid-template-areas:'area1 . . . . . . .'
+                            'area2 area3 . . .  about about .'
+                            'area4 area5 area6 . . about about .'
+                            'area7 area8 area9 area10 . . . . '
+                            'area11 area12 area13 area14 area15 . . .'
+                            'area16 area17 area18 area19 area20 area21 . .'
+                            'area22 area23 area24 area25 area26 area27 area28 .'
+                            'area29 area30 area31 area32 area33 area34 area35 area36'/* 
                             'area37 area38 area39 area40 area41 area42 area43 area44 area45 .'
-                            'area46 area47 area48 area49 area50 area51 area52 area53 area54 area55';
+                            'area46 area47 area48 area49 area50 area51 area52 area53 area54 area55' */;
     }
                 .game .zeros{
                     margin: 3px;
@@ -237,18 +237,21 @@ body{
         .fabs li{
             list-style: none;
             width: 50%;
-            padding: 5px 20%;
+            padding: 5px 0;
+            text-align: center;
             text-shadow: #000 -1px 1px;
             height: 40px;
             cursor: pointer;
             border: rgb(0, 0, 0) solid;
             border-width: 1px 2px 0 2px;
+            font-size: 30px;
+            color: rgb(255, 5, 5);
         }
         .fabs .scoreTrig{
             background-color: rgb(184, 184, 184);
         }
         .fabs .chatTrig{
-            background-color: rgb(0, 48, 41);
+            background-color: rgb(184, 255, 246);
         }
 
 
@@ -287,10 +290,17 @@ body{
                                                     border: rgb(255, 82, 82) solid;
                                                     border-width: 0 0 0 2px;
                                                 }
+                                            h5{
+                                                width: 100%;
+                                                font-size: 40px;
+                                                position: absolute;
+                                                bottom: 0;
+                                            }
+
+
 
                                         .chat{
                                             z-index: 8;
-                                            background-color: rgb(0, 48, 41);
                                         }
                                                 .chat .typer_div{
                                                     position: absolute;

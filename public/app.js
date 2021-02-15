@@ -106,6 +106,8 @@ const crossed = (e, r, c) => {
     // send cross to opp
     if (!crossedZeros.includes(e)){
         send(['crossed', e.classList[1]]);
+        send(['crossed', e.classList[1]]);
+        send(['crossed', e.classList[1]]);
         crossedZeros.push(e);
     };
 
@@ -226,6 +228,9 @@ peer.on('open', id => {
         colorDark : "#000000",
         colorLight : "#ffffff"
     });
+    if (joinForm.peerId.value){
+        joinGame();
+    };
 });
 
 
@@ -332,7 +337,7 @@ const recieve = (data) => {
 
         case 'crossed':
 
-            toast(data[1]);
+            //toast(data[1]);
             let zero = document.querySelector(`.${data[1]}`);
             crossedZeros.push(zero);
             zero.click();
