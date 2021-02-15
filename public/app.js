@@ -106,8 +106,6 @@ const crossed = (e, r, c) => {
     // send cross to opp
     if (!crossedZeros.includes(e)){
         send(['crossed', e.classList[1]]);
-        send(['crossed', e.classList[1]]);
-        send(['crossed', e.classList[1]]);
         crossedZeros.push(e);
     };
 
