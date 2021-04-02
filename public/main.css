@@ -222,6 +222,7 @@ body{
                     border-radius: 50%;
                     border: 2px rgb(0, 0, 0) solid;
                     cursor: pointer;
+                    filter: hue-rotate(360deg);
                 }
                 .game .crossed_by_me{
                     animation: cross_by_me 2s forwards;
@@ -231,7 +232,7 @@ body{
                         background: rgb(255, 238, 0);
                     }
                     to{
-                        background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(104, 255, 104) 100%);                    }
+                        background-color: rgb(104, 255, 104);                    }
                 }
                 .game .crossed_by_op{
                     animation: cross_by_op 2s forwards;
@@ -242,7 +243,7 @@ body{
                         background: rgb(255, 238, 0);
                     }
                     to{
-                        background: linear-gradient(45deg, rgba(50, 40, 30, 0.5) 65%, rgb(255, 88, 22) 100%);
+                        background-color: rgb(223, 89, 37);
                     }
                 }
 

@@ -125,7 +125,7 @@ const crossed = (e, r, c) => {
     };
 
     e.setAttribute('data-cross', 'crossed');
-    e.setAttribute('onclick', '');
+
 
     let score = 0,
         row = Array.from(document.querySelectorAll(`.${r}`)),
@@ -137,33 +137,33 @@ const crossed = (e, r, c) => {
         if (rowScored && !colScored){
             score = (row.length);
             row.forEach(zero => {
-                zero.style.borderWidth = '15px';
+                zero.style.borderColor = 'rgb(47, 21, 190)';
                 setTimeout(() => {
-                    zero.style.borderWidth = '2px';
+                    zero.style.borderColor = 'black';
                 }, 2000);
             });
         };
         if (colScored && !rowScored){
             score = (col.length);
             col.forEach(zero => {
-                zero.style.borderWidth = '15px';
+                zero.style.borderColor = 'rgb(47, 21, 190)';
                 setTimeout(() => {
-                    zero.style.borderWidth = '2px';
+                    zero.style.borderColor = 'black';
                 }, 2000);
             });
         };
         if (rowScored && colScored){
             score = (row.length) + (col.length);
             row.forEach(zero => {
-                zero.style.borderWidth = '15px';
+                zero.style.borderColor = 'rgb(47, 21, 190)';
                 setTimeout(() => {
-                    zero.style.borderWidth = '2px';
+                    zero.style.borderColor = 'black';
                 }, 2000);
             });
             col.forEach(zero => {
-                zero.style.borderWidth = '15px';
+                zero.style.borderColor = 'rgb(47, 21, 190)';
                 setTimeout(() => {
-                    zero.style.borderWidth = '2px';
+                    zero.style.borderColor = 'black';
                 }, 2000);
             });
         };
